@@ -89,7 +89,7 @@ public class TradingInstruction {
 	}
 
 
-	public Action getType() {
+	public Action getAction() {
 		return action;
 	}
 	

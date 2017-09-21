@@ -82,14 +82,14 @@ public class DailyTradeReport implements PrintStreamPrintable {
 		DailyTradeReportPrintingUtility.printDailyOutgoingSectionHeader(printStream, reportLocale);
 		
 		DailyTradeReportPrintingUtility.printDailyTradeTotals(printStream, reportLocale, dailyTradeTotalBuyersList);
+
+		DailyTradeReportPrintingUtility.printIncomingEntityRankingSectionHeader(printStream, reportLocale);
+		
+		DailyTradeReportPrintingUtility.printEntityRankings(printStream, sellersEntityRankingByHighestTradeAmountOnSingleInstruction);
 		
 		DailyTradeReportPrintingUtility.printOutgoingEntityRankingSectionHeader(printStream, reportLocale);
 		
 		DailyTradeReportPrintingUtility.printEntityRankings(printStream, buyersEntityRankingByHighestTradeAmountOnSingleInstruction);
-		
-		DailyTradeReportPrintingUtility.printIncomingEntityRankingSectionHeader(printStream, reportLocale);
-		
-		DailyTradeReportPrintingUtility.printEntityRankings(printStream, sellersEntityRankingByHighestTradeAmountOnSingleInstruction);
 		
 	}
 	

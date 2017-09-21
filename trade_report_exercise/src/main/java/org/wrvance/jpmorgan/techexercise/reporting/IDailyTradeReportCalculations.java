@@ -22,10 +22,10 @@ public interface IDailyTradeReportCalculations {
 		
 		List<DailyTradeTotal> dailyTradeAmountList = new ArrayList<DailyTradeTotal>();
 		
-		List<LocalDate> sortedDateList = instructions.stream().filter(i -> i.getType().equals(type)).map(i -> i.getAdjustedSettlementDate()).distinct().sorted((d1, d2) -> -1 * d1.compareTo(d2)).collect(Collectors.toList());
+		List<LocalDate> sortedDateList = instructions.stream().filter(i -> i.getAction().equals(type)).map(i -> i.getAdjustedSettlementDate()).distinct().sorted((d1, d2) -> -1 * d1.compareTo(d2)).collect(Collectors.toList());
 		
 		for(LocalDate date : sortedDateList){
-			BigDecimal sum = instructions.stream().filter(i -> i.getAdjustedSettlementDate().equals(date) && i.getType().equals(type)).map(TradingInstruction::getTradeAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+			BigDecimal sum = instructions.stream().filter(i -> i.getAdjustedSettlementDate().equals(date) && i.getAction().equals(type)).map(TradingInstruction::getTradeAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 			dailyTradeAmountList.add(new DailyTradeTotal(date, sum));
 		}
 		
@@ -38,13 +38,13 @@ public interface IDailyTradeReportCalculations {
 	 */
 	public default List<TradeEntity> rankEntitiesByHighestTradeAmountForSingleInstructionForType(List<TradingInstruction> instructions, TradingInstruction.Action type){
 				
-		List<TradeEntity> entities = instructions.stream().filter(i -> i.getType().equals(type)).map(i -> i.getEntity()).distinct().collect(Collectors.toList());
+		List<TradeEntity> entities = instructions.stream().filter(i -> i.getAction().equals(type)).map(i -> i.getEntity()).distinct().collect(Collectors.toList());
 	
 		HashMap<TradeEntity, BigDecimal> entityMaxTradeValueMap = new HashMap<TradeEntity, BigDecimal>();
 		
 		for(TradeEntity entity : entities){
 			
-			BigDecimal maxDailyTradeForEntity = instructions.stream().filter(i -> i.getEntity().equals(entity) && i.getType().equals(type)).map(i -> i.getTradeAmount()).reduce(BigDecimal.ZERO, (a, b) -> a.max(b));
+			BigDecimal maxDailyTradeForEntity = instructions.stream().filter(i -> i.getEntity().equals(entity) && i.getAction().equals(type)).map(i -> i.getTradeAmount()).reduce(BigDecimal.ZERO, (a, b) -> a.max(b));
 			
 			entityMaxTradeValueMap.put(entity,  maxDailyTradeForEntity);
 					
