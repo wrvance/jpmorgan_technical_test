@@ -14,6 +14,10 @@ The package structure reflects the nature of the task, e.g. it should come as no
 supporting utility class, etc. The structure intends, in part, to help clarify the purpose of the software and should lend itself to easily apprehend
 an overview of the project.
 
+Regarding testing, I am satisfied with the level of test coverage that has been provided. However, given more time, I would have cleaned up
+the code in some of these tests; there is some duplication (particularly in the setting up of initial conditions) in there that is not best practice - I just wanted you to know that I realise
+this.
+
 ASSUMPTIONS/FURTHER QUESTIONS
 ------------------------------
 
